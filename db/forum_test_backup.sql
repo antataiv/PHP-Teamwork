@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2015 at 05:28 PM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
+-- Generation Time: Apr 27, 2015 at 07:02 AM
+-- Server version: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,17 +30,20 @@ CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL,
   `cat_name` varchar(255) NOT NULL,
   `cat_description` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `cat_name`, `cat_description`) VALUES
-(1, 'Software', 'software community problems'),
-(2, 'Hardware', 'Hardware problems'),
-(3, 'Phillantropy', 'What is to a human'),
-(4, 'Shits', 'More shits');
+(1, 'Software', 'Some Software Related Problems'),
+(5, 'Hardware', 'Some sample hardware topics'),
+(6, 'FAQ', 'Frequently Asked Questions'),
+(7, 'Other', 'Some Other Questions'),
+(8, 'New Sample Category', 'Sample'),
+(9, 'One More Category', 'One More'),
+(10, 'Anton''s category', 'Category');
 
 -- --------------------------------------------------------
 
@@ -54,23 +57,21 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `post_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_topic` int(11) NOT NULL,
   `post_by` int(11) NOT NULL,
-  `guest` varchar(50) DEFAULT NULL,
-  `guest_email` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `guest` varchar(255) DEFAULT NULL,
+  `guest_email` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `post_content`, `post_date`, `post_topic`, `post_by`, `guest`, `guest_email`) VALUES
-(1, 'asdasdasd', '2015-04-24 19:47:40', 16, 19, 'guest', NULL),
-(2, 'aaaaaaaaaaaaaaaa', '2015-04-24 19:47:40', 18, 19, 'guest', NULL),
-(3, 'Haha kak taka', '2015-04-25 12:01:30', 15, 21, 'guest', NULL),
-(4, 'Зддсадсад', '2015-04-25 12:06:16', 15, 21, 'guest', NULL),
-(7, 'sadasdasd', '2015-04-25 18:48:24', 5, 21, 'asd', 'da@asd.vf'),
-(8, 'Папо папо капо тапо', '2015-04-25 18:50:02', 5, 21, 'Папо', 'man@aaa.bg'),
-(10, 'Te taka be momche', '2015-04-25 22:45:55', 21, 21, 'krotko', 'mladej@aaa.bf'),
-(11, 'lalallaa', '2015-04-26 18:01:31', 30, 22, NULL, NULL);
+(1, 'You are studid!!!', '2015-04-22 18:09:45', 1, 20, '', ''),
+(15, 'You should try to fix it!', '2015-04-26 14:29:58', 1, 27, 'Guest1234', ''),
+(16, 'Hahahahaha', '2015-04-26 14:30:59', 1, 27, 'Bai Ivan Golemia', 'bai_ivan@bai.bg'),
+(17, 'И ще си напиша първия коментар!!! :)', '2015-04-26 14:36:40', 9, 19, '', NULL),
+(18, 'Ajde de... koga shte hodim???', '2015-04-26 14:39:16', 5, 18, '', NULL),
+(19, 'Gleda televizia :D', '2015-04-26 14:39:43', 3, 18, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -80,39 +81,26 @@ INSERT INTO `posts` (`id`, `post_content`, `post_date`, `post_topic`, `post_by`,
 
 CREATE TABLE IF NOT EXISTS `topics` (
 `id` int(11) NOT NULL,
-  `topic_subject` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_mysql500_ci NOT NULL,
+  `topic_subject` varchar(255) NOT NULL,
   `topic_description` text NOT NULL,
   `topic_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `topic_cat` int(11) NOT NULL,
   `topic_by` int(11) NOT NULL,
   `visits` int(11) NOT NULL DEFAULT '0',
   `topic_tags` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `topics`
 --
 
 INSERT INTO `topics` (`id`, `topic_subject`, `topic_description`, `topic_date`, `topic_cat`, `topic_by`, `visits`, `topic_tags`) VALUES
-(1, 'Kak da si instaliram composer', 'Iskam da znam kak, towa e !', '2015-04-22 18:16:51', 1, 21, 0, NULL),
-(2, 'Kolko struva edin kon?', 'Suztezatelen kon.', '2015-04-22 18:16:51', 2, 21, 0, NULL),
-(5, 'proba proba', 'probvam dali shte se dublira', '2015-04-22 19:01:22', 1, 21, 0, NULL),
-(11, 'Proba', 'Test test', '2015-04-23 19:08:01', 2, 19, 0, 'test'),
-(15, 'ЗДРАСТИ', 'тата', '2015-04-23 19:18:07', 1, 19, 0, ''),
-(16, 'What is to be human?', 'Hi everybody, I''m Benjamin X!', '2015-04-23 23:52:35', 3, 19, 0, 'hi human'),
-(17, 'What is to be human?', 'Hi everybody, I''m Benjamin X!', '2015-04-23 23:53:26', 3, 19, 0, 'hi human'),
-(18, 'Stupid fuckers', 'asldkjsad  MOTHER FUCKERS', '2015-04-24 17:46:47', 4, 19, 0, ''),
-(20, 'Друга проба', 'Тестване на кирилицатааа!', '2015-04-24 18:13:24', 3, 19, 0, ''),
-(21, 'PHP forum template', 'This is my new template', '2015-04-24 18:44:28', 1, 19, 0, 'php'),
-(22, 'Аз съм нова тема това е моето заглавие', 'Това е моя кирилизиран текст.', '2015-04-24 18:46:49', 3, 19, 0, ''),
-(23, 'Колко ти е часа?', 'Часът е 11:01. Времето е леко дъждовно.', '2015-04-25 11:01:55', 4, 22, 0, 'време час'),
-(24, 'Pak opitvam neshto', 'Iskame da stane i pravim proba .', '2015-04-25 21:31:32', 3, 19, 0, ''),
-(25, 'The virtuosity in war', 'War against the whole human kind proba moba.', '2015-04-25 21:32:50', 1, 19, 0, ''),
-(26, 'I''m new in the city', 'Hi, would you be pleased to go out with me, I don''t know anybody here. Thank You!', '2015-04-26 17:52:51', 3, 22, 0, ''),
-(27, 'I''m new in the city', 'Hi, would you be pleased to go out with me, I don''t know anybody here. Thank You!', '2015-04-26 17:54:18', 3, 22, 0, ''),
-(28, 'I''m new in the city', 'Hi, would you be pleased to go out with me, I don''t know anybody here. Thank You!', '2015-04-26 17:55:14', 3, 22, 0, ''),
-(29, 'I''m new in the city', 'Hi, would you be pleased to go out with me, I don''t know anybody here. Thank You!', '2015-04-26 17:55:32', 3, 22, 0, ''),
-(30, 'Dublirane', 'Kofti moment', '2015-04-26 17:56:23', 1, 22, 0, '');
+(1, 'How to fix my PC?', 'PC broken', '2015-04-22 18:08:06', 1, 19, 0, NULL),
+(2, 'Alabalanica', 'Ala bala nica', '2015-04-23 20:04:37', 6, 19, 0, 'some, test, tag'),
+(3, 'What is Anton doing?', 'What Anton is doing in his free time?', '2015-04-24 17:46:23', 10, 19, 0, 'sport, anton, topic'),
+(4, 'My computer broke?!?', 'My computer suddenly stopped working', '2015-04-24 17:47:45', 5, 19, 0, 'computer, broken'),
+(5, 'Mountain Climbing', 'Wanna go mountain climbing', '2015-04-24 17:48:13', 7, 19, 0, ''),
+(9, 'Опит на кирилица', 'Опит да направя топик на кирилица', '2015-04-26 14:36:17', 7, 19, 0, 'cyrillic, topic, try');
 
 -- --------------------------------------------------------
 
@@ -127,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `date_registered` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_admin` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `users`
@@ -137,8 +125,10 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `date_registered`, `is_a
 (18, 'Pesho', '8588310a98676af6e22563c1559e1ae20f85950792bdcd0c8f334867c54581cd', 'pesho@pesh.com', '2015-04-22 15:12:46', 0),
 (19, 'Anton', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'anton@anton.com', '2015-04-22 15:12:58', 1),
 (20, 'Gosho', '02359ffb8eb977c499d03c598de268df19edb14236fd3514dcf5344fcdd43833', 'pesho@pesh.com', '2015-04-22 15:26:43', 0),
-(21, 'guest', 'sadhikjashduiasd', 'guest@abv.bg', '2015-04-22 18:13:31', 0),
-(22, 'iva', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ivo@abv.bg', '2015-04-24 16:38:13', 0);
+(23, 'Ivan', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ivan@ivan.com', '2015-04-24 16:33:38', 0),
+(24, 'Ivan123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ivan@ivan.asdas', '2015-04-24 16:44:14', 0),
+(25, 'Pesho123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'asdsada', '2015-04-24 16:45:25', 0),
+(27, 'guest', '6dbb02f5dccbb6146d248539e30a1bed4ab5cdd2761eb371e4bc5e26aafa4d97', 'guest@guest.com', '2015-04-26 14:00:15', 0);
 
 --
 -- Indexes for dumped tables
@@ -176,22 +166,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- Constraints for dumped tables
 --

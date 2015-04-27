@@ -46,10 +46,10 @@ $(document).ready(function(){
     }
 
     function disableRegisterButton(){
-        $('#registerButton').prop('disabled', 'disabled');
+        $('#registerButton').prop('disabled', true);
     }
 
     function enableRegisterButton(){
-        $('#registerButton').removeProp('disabled');
+        $('#registerButton').prop('disabled', false);
     }
 });

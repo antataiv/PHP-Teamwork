@@ -3,20 +3,19 @@
 include 'connect.php';
 include 'header.php';
 
-if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true)
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)
 {
-    echo 'You are already signed in, you can <a href="logout.php">log out</a> if you want.';
+    echo 'You are already signed in, you can <a class="item" href="logout.php">log out</a> if you want.';
 }
 else
 {
-    if($_SERVER['REQUEST_METHOD'] != 'POST')
-    {
-        echo '<h3>Sign in</h3>';
+    if($_SERVER['REQUEST_METHOD'] != 'POST') {
+        echo '<h2>Log in</h2>';
         echo '<form method="post" action="">
-            Username: <input type="text" name="user_name" />
-            Password: <input type="password" name="user_pass">
-            <input type="submit" value="Sign in" />
-         </form>';
+                <label for="user_name">Username: </label><input type="text" name="user_name" required />
+               <label for="user-pass">Password: </label><input type="password" id="password" name="user_pass" required />
+                <input type="submit" value="Log in" class="sub-btn"/>
+                </form>';
     }
     else
     {       
@@ -49,7 +48,7 @@ else
 
             $password = hash('sha256', $password);
                     
-            $sql = "SELECT id, name, password, is_admin FROM users WHERE "
+            $sql = "SELECT id, name, password, email, is_admin FROM users WHERE "
                     . "name='$username' AND password='$password'";
                                               
             $result = $conn->query($sql);
@@ -69,11 +68,12 @@ else
                     {
                         $_SESSION['user_id']    = $row['id'];
                         $_SESSION['user_name']  = $row['name'];
+                        $_SESSION['user_email'] = $row['email'];
                         $_SESSION['is_admin']  = $row['is_admin'];
                     }
                      
                     echo 'Welcome, ' . $_SESSION['user_name'] . 
-                            '. <a href="index.php">Proceed to the main page</a>.';
+                            '. <a class="item" href="index.php">Proceed to the main page</a>.';
 
                     //var_dump($_SESSION);
                 }
@@ -86,5 +86,6 @@ else
     }
 }
  
+include 'categories_view.php';
 include 'footer.php';
 ?>

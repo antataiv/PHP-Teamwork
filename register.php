@@ -2,17 +2,20 @@
 
 include 'connect.php';
 include 'header.php';
- 
-echo '<h3>Sign up</h3>';
 
-if($_SERVER['REQUEST_METHOD'] != 'POST'){   
-    echo '<form method="post" action="">
-        Username: <input type="text" name="user_name" /><br>
-        Password: <input type="password" id="password" name="user_pass"><br>
-        Password again: <input type="password" id="confirm-pass" name="user_pass_check"><br>
-        E-mail: <input type="email" id="email" name="user_email"><br>
-        <input type="submit" id="registerButton" value="Register" />
-     </form>';
+if($_SERVER['REQUEST_METHOD'] != 'POST'){
+    if(empty($_SESSION)) {
+        echo '<h2>Sign up</h2>';
+        echo '<form method="post" action="">
+               <label for="user_name">Username:<span class="red"><sup>*</sup></span></label><input type="text" name="user_name" required />
+               <label for="user-pass">Password:<span class="red"><sup>*</sup></span></label><input type="password" id="password" name="user_pass" required />
+               <label for="confirm-pass">Password again:<span class="red"><sup>*</sup></span></label><input type="password" id="confirm-pass" name="user_pass_check" required />
+               <label for="email">E-mail:<span class="red"><sup>*</sup></span></label><input type="email" id="email" name="user_email" required />
+                <input type="submit" id="registerButton" value="Register" class="sub-btn"/>
+                </form>';
+    } else {
+        echo 'You already logged in. You must first <a class="item" href="logout.php">Log out</a> and then try to <a class="item" href="register.php">register</a>!!!';
+    }
 } else {
     
     $errors = array();
@@ -39,6 +42,16 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     } else {
         array_push($errors, 'The password field cannot be empty.');
     }
+
+    if($_POST['user_email']){
+        $email_regex = '/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i';
+        //var_dump(preg_match($email_regex, $_POST['user_email']));
+        if(preg_match($email_regex, $_POST['user_email']) == 0) {
+            array_push($errors, 'You have entered an invalid email.');
+        } else {
+            array_push($errors, 'The email field cannot be empty.');
+        }
+    }
 //    var_dump($_POST);
 //    var_dump($errors);
 
@@ -62,13 +75,17 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
                                                      
         if ($conn->query($sql) === TRUE) {
             echo "Your registration is successful. ";
-            echo 'You can <a href="login.php">log in</a> now.';
+            echo 'You can <a class="item" href="login.php">log in</a> now.';
+        } else if ($conn->errno == 1062) {
+            echo 'This username is already taken. Please choose another username and try to <a class="item" href="register.php">register</a>.';
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            //echo "Error: " . $sql . "<br>" . $conn->error;
+            echo 'You could not be registered at the moment. Please try to <a class="item" href="register.php">register</a> again.';
         }
     }
 }
  
+include 'categories_view.php';
 include 'footer.php';
 ?>
 
