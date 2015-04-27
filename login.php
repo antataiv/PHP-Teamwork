@@ -5,15 +5,15 @@ include 'header.php';
 
 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)
 {
-    echo 'You are already signed in, you can <a class="item" href="logout.php">log out</a> if you want.';
+    echo 'You are already signed in, you can <a href="logout.php">log out</a> if you want.';
 }
 else
 {
     if($_SERVER['REQUEST_METHOD'] != 'POST') {
         echo '<h2>Log in</h2>';
         echo '<form method="post" action="">
-                <label for="user_name">Username: </label><input type="text" name="user_name" required />
-               <label for="user-pass">Password: </label><input type="password" id="password" name="user_pass" required />
+                <label for="user_name">Username: </label><input type="text" name="user_name" required="required"/>
+               <label for="user-pass">Password: </label><input type="password" id="password" name="user_pass" required="required"/>
                 <input type="submit" value="Log in" class="sub-btn"/>
                 </form>';
     }
@@ -73,7 +73,7 @@ else
                     }
                      
                     echo 'Welcome, ' . $_SESSION['user_name'] . 
-                            '. <a class="item" href="index.php">Proceed to the main page</a>.';
+                            '. <a href="index.php">Proceed to the main page</a>.';
 
                     //var_dump($_SESSION);
                 }

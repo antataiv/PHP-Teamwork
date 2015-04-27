@@ -7,14 +7,14 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     if(empty($_SESSION)) {
         echo '<h2>Sign up</h2>';
         echo '<form method="post" action="">
-               <label for="user_name">Username:<span class="red"><sup>*</sup></span></label><input type="text" name="user_name" required />
-               <label for="user-pass">Password:<span class="red"><sup>*</sup></span></label><input type="password" id="password" name="user_pass" required />
-               <label for="confirm-pass">Password again:<span class="red"><sup>*</sup></span></label><input type="password" id="confirm-pass" name="user_pass_check" required />
-               <label for="email">E-mail:<span class="red"><sup>*</sup></span></label><input type="email" id="email" name="user_email" required />
+               <label for="user_name">Username: <span class="red"><sup>*</sup></span></label><input type="text" name="user_name"  required="required"/>
+               <label for="user-pass">Password: <span class="red"><sup>*</sup></span></label><input type="password" id="password" name="user_pass" required="required"/>
+               <label for="confirm-pass">Password again: <span class="red"><sup>*</sup></span></label><input type="password" id="confirm-pass" name="user_pass_check" required="required"/>
+               <label for="email">E-mail: <span class="red"><sup>*</sup></span></label><input type="email" id="email" name="user_email" required="required"/>
                 <input type="submit" id="registerButton" value="Register" class="sub-btn"/>
                 </form>';
     } else {
-        echo 'You already logged in. You must first <a class="item" href="logout.php">Log out</a> and then try to <a class="item" href="register.php">register</a>!!!';
+        echo 'You already logged in. You must first <a href="logout.php">Log out</a> and then try to <a href="register.php">register</a>!!!';
     }
 } else {
     
@@ -42,7 +42,6 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     } else {
         array_push($errors, 'The password field cannot be empty.');
     }
-
     if($_POST['user_email']){
         $email_regex = '/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i';
         //var_dump(preg_match($email_regex, $_POST['user_email']));
@@ -75,12 +74,12 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
                                                      
         if ($conn->query($sql) === TRUE) {
             echo "Your registration is successful. ";
-            echo 'You can <a class="item" href="login.php">log in</a> now.';
+            echo 'You can <a href="login.php">log in</a> now.';
         } else if ($conn->errno == 1062) {
-            echo 'This username is already taken. Please choose another username and try to <a class="item" href="register.php">register</a>.';
+            echo 'This username is already taken. Please choose another username and try to <a href="register.php">register</a>.';
         } else {
             //echo "Error: " . $sql . "<br>" . $conn->error;
-            echo 'You could not be registered at the moment. Please try to <a class="item" href="register.php">register</a> again.';
+            echo 'You could not be registered at the moment. Please try to <a href="register.php">register</a> again.';
         }
     }
 }
