@@ -127,6 +127,15 @@ h3 {margin: 0; padding: 0;}
     font-size: 1rem;
     color: rgba(0, 128, 87, 0.95);
     padding: 3px 0 0 0;
+    display: inherit;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1000px;
+    background-color: #cccccc;
+}
+
+#footer > div{
+    width: 100%;
 }
  
 .topic-post {
@@ -296,5 +305,8 @@ input.post-button{
 .red {
     color: red;
 }
-
+#footSprite {
+    width: 25px;
+    height: 30px;
+}
 

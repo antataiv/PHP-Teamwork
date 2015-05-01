@@ -1,10 +1,9 @@
 <?php
-
 include 'connect.php';
 include 'header.php';
 
 if($_SERVER['REQUEST_METHOD'] != 'POST'){
-    if(empty($_SESSION)) {
+    if(!isset($_SESSION['logged_in'])) {
         echo '<h2>Sign up</h2>';
         echo '<form method="post" action="">
                <label for="user_name">Username: <span class="red"><sup>*</sup></span></label><input type="text" name="user_name"  required="required"/>
@@ -47,9 +46,10 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
         //var_dump(preg_match($email_regex, $_POST['user_email']));
         if(preg_match($email_regex, $_POST['user_email']) == 0) {
             array_push($errors, 'You have entered an invalid email.');
-        } else {
-            array_push($errors, 'The email field cannot be empty.');
         }
+
+    } else {
+        array_push($errors, 'The email field cannot be empty.');
     }
 //    var_dump($_POST);
 //    var_dump($errors);
@@ -63,9 +63,9 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
         }
         echo '</ul>';
     } else {       
-        $username = htmlentities(trim($_POST['user_name']));
-        $password = htmlentities(trim($_POST['user_pass']));
-        $email = htmlentities(trim($_POST['user_email']));
+        $username = mysqli_real_escape_string($conn, trim($_POST['user_name']));
+        $password = mysqli_real_escape_string($conn, trim($_POST['user_pass']));
+        $email = mysqli_real_escape_string($conn, trim($_POST['user_email']));
 
         $password = hash('sha256', $password);
                 

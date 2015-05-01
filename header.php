@@ -1,6 +1,4 @@
-<?php
-    session_start();
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -18,7 +16,7 @@
 
         <nav id="menu">
             <ul>
-            <li><a class="item" href="index.php">Home</a></li>
+            <li><a class="item" name="top" href="index.php">Home</a></li>
             <li><a class="item" id="create-topic" href="create_topic.php">Create a topic</a></li>
             <li><a class="item" href="create_category.php">Create a category</a></li>
                 <?php

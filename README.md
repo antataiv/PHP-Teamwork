@@ -1,2 +1,4 @@
-# PHP-Teamwork in Software University
-Creation of a sample forum
+# PHP_Team_Seattle
+Teamwork for SoftUni
+
+http://codestorm.cloudvps.bg/index.php
