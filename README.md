@@ -1,2 +1,2 @@
-# A sample PHP Forum
-Software University PHP Basics teamwork peoject.
+# A Sample PHP Forum
+Software University PHP Basics Teamwork project
